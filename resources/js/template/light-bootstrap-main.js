@@ -1,6 +1,6 @@
 // import VTooltip from 'v-tooltip'
 // Notifications plugin
-// import Notifications from '../components/NotificationPlugin'
+import Notifications from './components/NotificationPlugin'
 // A plugin file where you could register global components used across the app
 import GlobalComponents from './globalComponents'
 // A plugin file where you could register global directives
@@ -21,7 +21,7 @@ export default {
     Vue.use(GlobalComponents)
     Vue.use(GlobalDirectives)
     Vue.use(SideBar)
-    // Vue.use(Notifications)
+    Vue.use(Notifications)
     // Vue.use(VTooltip)
   }
 }

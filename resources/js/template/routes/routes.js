@@ -10,12 +10,16 @@ import Typography from '../pages/Typography.vue'
 import Icons from '../pages/Icons.vue'
 import Notifications from '../pages/Notifications.vue'
 import Upgrade from '../pages/Upgrade.vue'
+import Login from '../pages/Login'
 
 const routes = [
   {
-    path: '/',
+    path: '/admin',
     component: DashboardLayout,
-    redirect: '/admin/overview'
+  },
+  {
+    path: '/',
+    component: Login,
   },
   {
     path: '/admin',
