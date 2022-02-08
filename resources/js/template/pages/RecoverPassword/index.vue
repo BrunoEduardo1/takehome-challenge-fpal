@@ -1,36 +1,31 @@
 <script>
-import Cookie from 'js-cookie';
-
 export default {
-  name: 'Login',
+  name: 'RecoverPassword',
 
   data() {
     return {
-      email: 'zfahey@example.org',
-      password: 'password'
+      email: 'bruno_test@test.com',
+      inputDisabled: false
     };
   },
 
   methods: {
     handleSubmit() {
       let formData = {
-        email: this.email,
-        password: this.password
+        email: this.email
       };
 
       axios
-        .post(`/api/login`, formData)
+        .post(`/api/forgotPassword`, formData)
         .then((response) => {
-          Cookie.set('_task_token', response.data.access_token);
-
-          this.$router.push({ name: 'Overview' });
-
           this.$notifications.notify({
-            message: `Welcome`,
+            message: `${response.data.message}`,
             horizontalAlign: 'left',
             verticalAlign: 'top',
-            type: 'success'
+            type: response.data.success ? 'success' : 'danger'
           });
+
+          this.inputDisabled = true;
         })
         .catch((err) => {
           this.$notifications.notify({
@@ -47,12 +42,12 @@ export default {
 </script>
 
 <template>
-  <div id="login-form-wrapper" class="text-center">
+  <div id="recover-form-wrapper" class="text-center">
     <notifications></notifications>
 
     <main class="form-signin">
       <form @submit.stop.prevent="handleSubmit">
-        <h1 class="h3 mb-3 fw-normal">Login</h1>
+        <h1 class="h3 mb-3 fw-normal">Recuperar senha</h1>
 
         <div class="form-floating">
           <input
@@ -62,36 +57,20 @@ export default {
             class="form-control"
             placeholder="name@example.com"
             required
+            :disabled="inputDisabled"
           />
           <label for="floatingInput">Email</label>
         </div>
-        <div class="form-floating">
-          <input
-            id="floatingPassword"
-            v-model="password"
-            type="password"
-            class="form-control"
-            placeholder="Password"
-            required
-          />
-          <label for="floatingPassword">Senha</label>
-        </div>
 
-        <!-- <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me" /> Lembre-me
-          </label>
+        <!-- <div class="row">
+          <div class="col text-left mt-2 mb-3">
+            <small><router-link :to="'/'">Voltar para o Login</router-link></small>
+          </div>
         </div> -->
-        <div class="row">
-          <div class="col text-left mb-3">
-            <small><router-link :to="'/forgotPassword'">Recuperar senha</router-link></small>
-          </div>
-          <div class="col text-right mb-3">
-            <small><router-link :to="'/register'">Criar conta</router-link></small>
-          </div>
-        </div>
 
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
+        <button class="w-100 mt-3 btn btn-lg btn-success" type="submit" :disabled="inputDisabled">Enviar</button>
+
+        <router-link class="mt-3 w-100 btn btn-sm btn-light" :to="'/'">Voltar para o login</router-link>
       </form>
     </main>
   </div>
@@ -100,11 +79,11 @@ export default {
 <style scoped>
 @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css');
 html,
-#login-form-wrapper {
+#recover-form-wrapper {
   height: 100vh;
 }
 
-#login-form-wrapper {
+#recover-form-wrapper {
   display: flex;
   align-items: center;
   padding-top: 40px;

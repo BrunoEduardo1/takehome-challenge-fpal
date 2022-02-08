@@ -14,6 +14,7 @@ import Upgrade from '../pages/Upgrade.vue';
 // user authentication pages
 import Login from '../pages/Login';
 import Register from '../pages/Register';
+import RecoverPassword from '../pages/RecoverPassword';
 
 import AuthMiddleware from '../directives/auth.middleware';
 
@@ -33,6 +34,12 @@ const routes = [
     name: 'Register',
     component: Register,
     beforeEnter: AuthMiddleware.run
+  },
+  {
+    path: '/forgotPassword',
+    name: 'RecoverPassword',
+    component: RecoverPassword
+    // beforeEnter: AuthMiddleware.run
   },
   {
     path: '/admin',
