@@ -12,6 +12,8 @@ import Notifications from '../pages/Notifications.vue'
 import Upgrade from '../pages/Upgrade.vue'
 import Login from '../pages/Login'
 
+import AuthMiddleware from '../directives/auth.middleware'
+
 const routes = [
   {
     path: '/admin',
@@ -19,12 +21,14 @@ const routes = [
   },
   {
     path: '/',
+    name: 'Login',
     component: Login,
   },
   {
     path: '/admin',
     component: DashboardLayout,
     redirect: '/admin/overview',
+    beforeEnter: AuthMiddleware.run,
     children: [
       {
         path: 'overview',

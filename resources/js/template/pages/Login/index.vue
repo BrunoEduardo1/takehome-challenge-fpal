@@ -90,13 +90,15 @@ body {
 
 
 <script>
+import Cookie from "js-cookie";
+
 export default {
   name: "Login",
 
   data() {
     return {
-      email: "",
-      password: "",
+      email: "zfahey@example.org",
+      password: "password",
     };
   },
 
@@ -110,6 +112,8 @@ export default {
       axios
         .post(`/api/login`, formData)
         .then((response) => {
+
+          Cookie.set('_task_token', response.data.access_token);
 
           this.$router.push({ name: 'Overview' });
 
