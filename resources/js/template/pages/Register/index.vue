@@ -2,10 +2,11 @@
 import Cookie from 'js-cookie';
 
 export default {
-  name: 'Login',
+  name: 'Register',
 
   data() {
     return {
+      name: 'Bruno',
       email: 'zfahey@example.org',
       password: 'password'
     };
@@ -14,19 +15,19 @@ export default {
   methods: {
     handleSubmit() {
       let formData = {
+        name: this.name,
         email: this.email,
         password: this.password
       };
 
       axios
-        .post(`/api/login`, formData)
+        .post(`/api/register`, formData)
         .then((response) => {
-          Cookie.set('_task_token', response.data.access_token);
 
-          this.$router.push({ name: 'Overview' });
+          this.$router.push({ name: 'Login' });
 
           this.$notifications.notify({
-            message: `Welcome`,
+            message: `${response.data.message}`,
             horizontalAlign: 'left',
             verticalAlign: 'top',
             type: 'success'
@@ -52,11 +53,22 @@ export default {
 
     <main class="form-signin">
       <form @submit.stop.prevent="handleSubmit">
-        <h1 class="h3 mb-3 fw-normal">Login</h1>
+        <h1 class="h3 mb-3 fw-normal">Cadastro</h1>
 
         <div class="form-floating">
           <input
-            id="floatingInput"
+            id="floating-name-input"
+            v-model="name"
+            type="text"
+            class="form-control"
+            placeholder="Digite seu nome"
+            required
+          />
+          <label for="floatingInput">Nome</label>
+        </div>
+        <div class="form-floating">
+          <input
+            id="floating-password-input"
             v-model="email"
             type="email"
             class="form-control"
@@ -77,28 +89,12 @@ export default {
           <label for="floatingPassword">Senha</label>
         </div>
 
-        <!-- <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me" /> Lembre-me
-          </label>
-        </div> -->
-        <div class="row">
-          <div class="col text-left mb-3">
-            <small
-              ><router-link :to="'/register'"
-                >Recuperar senha</router-link
-              ></small
-            >
-          </div>
-          <div class="col text-right mb-3">
-            <small
-              ><router-link :to="'/register'">Criar conta</router-link></small
-            >
-          </div>
+        <div class="text-right mb-3">
+          <small><router-link :to="'/'">Possui usuário?</router-link></small>
         </div>
 
-        <button class="w-100 btn btn-lg btn-primary" type="submit">
-          Entrar
+        <button class="w-100 btn btn-lg btn-success" type="submit">
+          Finalizar
         </button>
       </form>
     </main>

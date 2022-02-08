@@ -1,28 +1,38 @@
-import DashboardLayout from '../layout/DashboardLayout.vue'
+import DashboardLayout from '../layout/DashboardLayout.vue';
 // GeneralViews
-import NotFound from '../pages/NotFoundPage.vue'
+import NotFound from '../pages/NotFoundPage.vue';
 
 // Admin pages
-import Overview from '../pages/Overview.vue'
-import UserProfile from '../pages/UserProfile.vue'
-import TableList from '../pages/TableList.vue'
-import Typography from '../pages/Typography.vue'
-import Icons from '../pages/Icons.vue'
-import Notifications from '../pages/Notifications.vue'
-import Upgrade from '../pages/Upgrade.vue'
-import Login from '../pages/Login'
+import Overview from '../pages/Overview.vue';
+import UserProfile from '../pages/UserProfile.vue';
+import TableList from '../pages/TableList.vue';
+import Typography from '../pages/Typography.vue';
+import Icons from '../pages/Icons.vue';
+import Notifications from '../pages/Notifications.vue';
+import Upgrade from '../pages/Upgrade.vue';
 
-import AuthMiddleware from '../directives/auth.middleware'
+// user authentication pages
+import Login from '../pages/Login';
+import Register from '../pages/Register';
+
+import AuthMiddleware from '../directives/auth.middleware';
 
 const routes = [
   {
     path: '/admin',
-    component: DashboardLayout,
+    component: DashboardLayout
   },
   {
     path: '/',
     name: 'Login',
     component: Login,
+    beforeEnter: AuthMiddleware.run
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
+    beforeEnter: AuthMiddleware.run
   },
   {
     path: '/admin',
@@ -68,7 +78,7 @@ const routes = [
     ]
   },
   { path: '*', component: NotFound }
-]
+];
 
 /**
  * Asynchronously load view (Webpack Lazy loading compatible)
@@ -79,4 +89,4 @@ function view(name) {
    return res;
 };**/
 
-export default routes
+export default routes;
