@@ -48,7 +48,7 @@ export default {
 </script>
 
 <template>
-  <div id="login-form-wrapper" class="text-center">
+  <div id="register-form-wrapper" class="text-center">
     <notifications></notifications>
 
     <main class="form-signin">
@@ -104,11 +104,11 @@ export default {
 <style scoped>
 @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css');
 html,
-body {
-  height: 100%;
+#register-form-wrapper {
+  height: 100vh;
 }
 
-body {
+#register-form-wrapper {
   display: flex;
   align-items: center;
   padding-top: 40px;

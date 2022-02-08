@@ -108,11 +108,11 @@ export default {
 <style scoped>
 @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css');
 html,
-body {
-  height: 100%;
+#login-form-wrapper {
+  height: 100vh;
 }
 
-body {
+#login-form-wrapper {
   display: flex;
   align-items: center;
   padding-top: 40px;
