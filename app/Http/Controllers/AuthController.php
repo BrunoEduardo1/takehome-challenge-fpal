@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\UserRegistrationRequest;
 use App\Http\Requests\UserForgotPasswordRequest;
+use App\Http\Requests\UserResetPasswordRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
@@ -141,7 +142,7 @@ class AuthController extends Controller
 
     /**
      * Send an email to the user to set the new password
-     * 
+     *
      * @param UserForgotPasswordRequest $request
      * @return string json
      */
@@ -179,19 +180,20 @@ class AuthController extends Controller
 
     /**
      * Resets users password
-     * 
+     *
+     * @param UserResetPasswordRequest $request
      * @return string json
      */
-    public function resetUserPassword(Request $request)
+    public function resetUserPassword(UserResetPasswordRequest $request)
     {
+
         $credentials = $request->only(
             'email', 'password', 'password_confirmation', 'token'
         );
-        
+
         $response = $this->broker()->reset(
             $credentials, function ($user, $password) {
-                // $this->resetPassword($user, $password);
-                // dd($user);
+
                 $user->password = Hash::make($password);
 
                 $user->setRememberToken(Str::random(60));
@@ -200,9 +202,19 @@ class AuthController extends Controller
 
                 event(new PasswordReset($user));
 
-                // Auth::guard()->login($user);
             }
         );
+
+        $responseCode = $response == 'password.reset' ? 200 : 422;
+
+        $responseData = [
+            'success' => $response == 'password.reset',
+            'message' => '',
+        ];
+
+        $responseData['message'] = trans($response);
+
+        return response()->json($responseData, $responseCode);
 
     }
 
