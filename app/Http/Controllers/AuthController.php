@@ -10,6 +10,8 @@ use App\Http\Requests\UserForgotPasswordRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -22,7 +24,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register', 'forgotPassword']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'forgotPassword', 'resetUserPassword']]);
     }
 
     /**
@@ -180,9 +182,28 @@ class AuthController extends Controller
      * 
      * @return string json
      */
-    public function resetPassword()
+    public function resetUserPassword(Request $request)
     {
+        $credentials = $request->only(
+            'email', 'password', 'password_confirmation', 'token'
+        );
         
+        $response = $this->broker()->reset(
+            $credentials, function ($user, $password) {
+                // $this->resetPassword($user, $password);
+                // dd($user);
+                $user->password = Hash::make($password);
+
+                $user->setRememberToken(Str::random(60));
+
+                $user->save();
+
+                event(new PasswordReset($user));
+
+                // Auth::guard()->login($user);
+            }
+        );
+
     }
 
 }
