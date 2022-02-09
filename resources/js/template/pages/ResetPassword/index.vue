@@ -35,7 +35,7 @@ export default {
         })
         .catch((err) => {
           this.$notifications.notify({
-            message: `${err.response.data.error}`,
+            message: `${err.response.data.message}`,
             // icon: 'nc-icon nc-app',
             horizontalAlign: 'left',
             verticalAlign: 'top',
