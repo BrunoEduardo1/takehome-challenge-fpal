@@ -1,6 +1,6 @@
 import DashboardLayout from '../layout/DashboardLayout.vue';
 // GeneralViews
-import NotFound from '../pages/NotFoundPage.vue';
+import NotFound from '../pages/NotFound';
 
 // Admin pages
 import Overview from '../pages/Overview.vue';
