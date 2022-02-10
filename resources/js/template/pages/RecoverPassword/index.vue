@@ -15,6 +15,8 @@ export default {
         email: this.email
       };
 
+      this.inputDisabled = true;
+
       axios
         .post(`/api/forgotPassword`, formData)
         .then((response) => {
@@ -25,7 +27,6 @@ export default {
             type: response.data.success ? 'success' : 'danger'
           });
 
-          this.inputDisabled = true;
         })
         .catch((err) => {
           this.$notifications.notify({

@@ -7,8 +7,8 @@ export default {
       email: this.$route.params.email,
       token: this.$route.params.token,
       inputDisabled: false,
-      password: null,
-      password_confirmation: null
+      password: '123123aa',
+      password_confirmation: '123123aa'
     };
   },
 
@@ -21,6 +21,8 @@ export default {
         password_confirmation: this.password_confirmation
       };
 
+      this.inputDisabled = true;
+
       axios
         .post(`/api/resetUserPassword`, formData)
         .then((response) => {
@@ -31,7 +33,7 @@ export default {
             type: response.data.success ? 'success' : 'danger'
           });
 
-          this.inputDisabled = true;
+          this.$router.push({ name: 'Login' });
         })
         .catch((err) => {
           this.$notifications.notify({
@@ -41,6 +43,10 @@ export default {
             verticalAlign: 'top',
             type: 'danger'
           });
+
+          if (err.response.data.errors) {
+            this.inputDisabled = false;
+          }
         });
     }
   }
@@ -76,6 +82,7 @@ export default {
             class="form-control mb-0"
             minlength="8"
             required
+            :disabled="inputDisabled"
           />
           <label for="floating-password-input">Senha</label>
         </div>
@@ -88,11 +95,14 @@ export default {
             class="form-control"
             minlength="8"
             required
+            :disabled="inputDisabled"
           />
           <label for="floating-password-confirmation-input">Confirmar senha</label>
         </div>
 
         <button class="w-100 mt-3 btn btn-lg btn-success" type="submit" :disabled="inputDisabled">Salvar</button>
+
+        <router-link class="mt-3 w-100 btn btn-sm btn-light" :to="'/'">Voltar para o login</router-link>
       </form>
     </main>
   </div>

@@ -205,10 +205,10 @@ class AuthController extends Controller
             }
         );
 
-        $responseCode = $response == 'password.reset' ? 200 : 422;
+        $responseCode = $response == 'passwords.reset' ? 200 : 422;
 
         $responseData = [
-            'success' => $response == 'password.reset',
+            'success' => $response == 'passwords.reset',
             'message' => '',
         ];
 
