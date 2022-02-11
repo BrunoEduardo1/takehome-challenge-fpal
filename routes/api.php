@@ -24,6 +24,14 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
 
+    Route::group(['prefix' => 'users', 'middleware' => 'auth:api'], function ($router) {
+        Route::get('', 'UsersController@getAll');
+        Route::get('/{id}', 'UsersController@getById');
+        Route::post('create', 'UsersController@create');
+        Route::put('update/{userId}', 'UsersController@update');
+        Route::delete('delete/{userId}', 'UsersController@delete');
+    });
+
 });
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
