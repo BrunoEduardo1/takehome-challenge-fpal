@@ -67,14 +67,14 @@ class UsersController extends Controller
         ], 404);
     }
 
-    public function getAll()
+    public function all()
     {
-        $usersDb = User::paginate(1)->makeHidden(['password', 'updated_at', 'email_verified_at', 'remember_token']);
+        $usersDb = User::paginate(1);
 
         return response()->json([
             'success' => true,
             'message' => 'ok',
-            'items' => $usersDb
+            'items' => $usersDb,
         ], 200);
 
     }

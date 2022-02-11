@@ -25,7 +25,7 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::post('me', 'AuthController@me');
 
     Route::group(['prefix' => 'users', 'middleware' => 'auth:api'], function ($router) {
-        Route::get('', 'UsersController@getAll');
+        Route::get('', 'UsersController@all');
         Route::get('/{id}', 'UsersController@getById');
         Route::post('create', 'UsersController@create');
         Route::put('update/{userId}', 'UsersController@update');
