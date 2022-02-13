@@ -11,6 +11,8 @@ import Icons from '../pages/Icons.vue';
 import Notifications from '../pages/Notifications.vue';
 import Upgrade from '../pages/Upgrade.vue';
 
+import Users from '../pages/Users';
+
 // user authentication pages
 import Login from '../pages/Login';
 import Register from '../pages/Register';
@@ -63,6 +65,11 @@ const routes = [
         path: 'user',
         name: 'User',
         component: UserProfile
+      },
+      {
+        path: 'users',
+        name: 'Usuários',
+        component: Users
       },
       {
         path: 'table-list',

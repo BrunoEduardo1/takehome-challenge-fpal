@@ -69,7 +69,7 @@ class UsersController extends Controller
 
     public function all()
     {
-        $usersDb = User::paginate(1);
+        $usersDb = User::paginate(10);
 
         return response()->json([
             'success' => true,

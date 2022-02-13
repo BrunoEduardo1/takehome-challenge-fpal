@@ -14,3 +14,4 @@ yarn-error.log
 notes.txt
 package-lock.json
 yarn.lock
+.vscode/
