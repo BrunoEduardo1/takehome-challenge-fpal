@@ -12,6 +12,9 @@ import Notifications from '../pages/Notifications.vue';
 import Upgrade from '../pages/Upgrade.vue';
 
 import Users from '../pages/Users';
+import UsersEdit from '../pages/Users/edit';
+import UsersCreate from '../pages/Users/create';
+import UsersView from '../pages/Users/view';
 
 // user authentication pages
 import Login from '../pages/Login';
@@ -68,8 +71,23 @@ const routes = [
       },
       {
         path: 'users',
-        name: 'Usuários',
+        name: 'users',
         component: Users
+      },
+      {
+        path: 'users/edit/:id',
+        name: 'edit-user',
+        component: UsersEdit
+      },
+      {
+        path: 'users/create',
+        name: 'create-user',
+        component: UsersCreate
+      },
+      {
+        path: 'users/view/:id',
+        name: 'view-user',
+        component: UsersView
       },
       {
         path: 'table-list',

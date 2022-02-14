@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
@@ -30,7 +31,7 @@ class UsersController extends Controller
             if ($createdUser->exists) {
                 return response()->json([
                     'success' => true,
-                    'message' => trans('user.created'),
+                    'message' => trans('success'),
                     'item_id' => $createdUser->id,
                 ], 201);
             }
@@ -69,7 +70,9 @@ class UsersController extends Controller
 
     public function all()
     {
-        $usersDb = User::paginate(10);
+        $usersDb = User::select(DB::raw('id, name, email, created_at, DATE_FORMAT(created_at, "%d\/%m\/%Y") as formatted_created_at'))
+            ->orderBy('id', 'DESC')
+            ->paginate(10);
 
         return response()->json([
             'success' => true,
@@ -83,12 +86,16 @@ class UsersController extends Controller
     {
         $data = $request->validated();
 
+        if (!empty($data['password'])) {
+            $data['password'] = Hash::make($data['password']);
+        }
+
         $updatedUser = (int) User::where('id', $userId)->update($data);
 
         if ($updatedUser) {
             return response()->json([
                 'success' => true,
-                'message' => 'ok',
+                'message' => trans('success'),
             ], 200);
         }
 
@@ -105,7 +112,7 @@ class UsersController extends Controller
         if ($deletedUser) {
             return response()->json([
                 'success' => true,
-                'message' => 'ok',
+                'message' => trans('success'),
             ], 200);
         }
 
