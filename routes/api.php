@@ -32,6 +32,15 @@ Route::group(['middleware' => 'api'], function ($router) {
         Route::delete('delete/{userId}', 'UsersController@delete');
     });
 
+    Route::group(['prefix' => 'tasks', 'middleware' => 'auth:api'], function ($router) {
+        Route::get('', 'TasksListsController@all');
+        Route::get('/{id}', 'TasksListsController@getById');
+        Route::get('/getByHash/{hash}', 'TasksListsController@getByHash');
+        Route::post('create', 'TasksListsController@create');
+        Route::put('update/{hash}', 'TasksListsController@update');
+        Route::delete('delete/{hash}', 'TasksListsController@delete');
+    });
+
 });
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {

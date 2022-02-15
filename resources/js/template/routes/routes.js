@@ -16,6 +16,11 @@ import UsersEdit from '../pages/Users/edit';
 import UsersCreate from '../pages/Users/create';
 import UsersView from '../pages/Users/view';
 
+import TasksLists from '../pages/TasksLists';
+import TasksEdit from '../pages/TasksLists/edit';
+import TasksCreate from '../pages/TasksLists/create';
+import TasksView from '../pages/TasksLists/view';
+
 // user authentication pages
 import Login from '../pages/Login';
 import Register from '../pages/Register';
@@ -68,6 +73,26 @@ const routes = [
         path: 'user',
         name: 'User',
         component: UserProfile
+      },
+      {
+        path: 'tasks',
+        name: 'tasks-lists',
+        component: TasksLists
+      },
+      {
+        path: 'tasks/edit/:id',
+        name: 'edit-task',
+        component: TasksEdit
+      },
+      {
+        path: 'tasks/create',
+        name: 'create-task',
+        component: TasksCreate
+      },
+      {
+        path: 'tasks/view/:id',
+        name: 'view-task',
+        component: TasksView
       },
       {
         path: 'users',

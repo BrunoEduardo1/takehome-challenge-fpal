@@ -6,8 +6,8 @@ import Card from '../../components/Cards/Card.vue';
 import DeleteModal from '../../components/Modals/Delete.vue';
 const tableColumns = [
   { key: 'id', header: 'Id' },
-  { key: 'name', header: 'Nome' },
-  { key: 'Email', header: 'Email' },
+  { key: 'title', header: 'Título' },
+  { key: 'description', header: 'Descrição' },
   { key: 'formatted_created_at', header: 'Criado em', type: 'Datetime' }
 ];
 
@@ -20,7 +20,7 @@ export default {
   },
   data() {
     return {
-      title: 'Usuários',
+      title: 'Listas de tarefas',
       table: {
         columns: [...tableColumns],
         data: [],
@@ -45,7 +45,7 @@ export default {
         }
       };
       axios
-        .delete(`api/users/delete/${this.confirmDeleteId}`, config)
+        .delete(`api/tasks/delete/${this.confirmDeleteId}`, config)
         .then((response) => {
           this.$notifications.notify({
             message: `${response.data.message}`,
@@ -74,7 +74,7 @@ export default {
         }
       };
       axios
-        .get(`api/users?page=${page}`, config)
+        .get(`api/tasks?page=${page}`, config)
         .then((response) => {
           if (response.data.success) {
             let responseData = response.data;
@@ -83,9 +83,9 @@ export default {
 
             this.table.pagination = responseData.items;
             this.table.actions = [
-              { key: 'view', name: 'Ver', path: 'users/view' },
-              { key: 'edit', name: 'Editar', path: 'users/edit' },
-              { key: 'delete', name: 'Deletar', path: 'users' }
+              { key: 'view', name: 'Ver', path: 'tasks/view' },
+              { key: 'edit', name: 'Editar', path: 'tasks/edit' },
+              { key: 'delete', name: 'Deletar', path: 'tasks' }
             ];
           } else {
             this.$router.push({ name: 'Overview' });
@@ -111,7 +111,7 @@ export default {
                   <h4 class="card-title">{{ title }}</h4>
                 </div>
                 <div class="col">
-                  <router-link class="btn btn-sm btn-secondary btn-fill float-right" :to="{ name: 'create-user' }"
+                  <router-link class="btn btn-sm btn-secondary btn-fill float-right" :to="{ name: 'create-task' }"
                     >Novo</router-link
                   >
                 </div>
