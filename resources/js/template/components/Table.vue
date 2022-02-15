@@ -61,7 +61,9 @@ export default {
       return item[column.toLowerCase()] !== 'undefined';
     },
     itemValue(item, column) {
-      return item[column.toLowerCase()];
+      return item[column.toLowerCase()].length > 25
+        ? item[column.toLowerCase()].substring(0, 25) + '...'
+        : item[column.toLowerCase()];
     },
     clickListener(actionKey, route, item) {
       if (actionKey.toLowerCase() !== 'delete') {
