@@ -71,6 +71,7 @@ export default {
           }
         )
         .then((response) => {
+          Cookie.remove('_task_token');
           this.$router.push({ name: 'Login' });
         })
         .catch((err) => {

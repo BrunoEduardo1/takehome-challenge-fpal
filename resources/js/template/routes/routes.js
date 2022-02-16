@@ -5,11 +5,6 @@ import NotFound from '../pages/NotFound';
 // Admin pages
 import Overview from '../pages/Overview.vue';
 import UserProfile from '../pages/UserProfile.vue';
-import TableList from '../pages/TableList.vue';
-import Typography from '../pages/Typography.vue';
-import Icons from '../pages/Icons.vue';
-import Notifications from '../pages/Notifications.vue';
-import Upgrade from '../pages/Upgrade.vue';
 
 import Users from '../pages/Users';
 import UsersEdit from '../pages/Users/edit';
@@ -120,31 +115,6 @@ const routes = [
         path: 'users/view/:id',
         name: 'view-user',
         component: UsersView
-      },
-      {
-        path: 'table-list',
-        name: 'Table List',
-        component: TableList
-      },
-      {
-        path: 'typography',
-        name: 'Typography',
-        component: Typography
-      },
-      {
-        path: 'icons',
-        name: 'Icons',
-        component: Icons
-      },
-      {
-        path: 'notifications',
-        name: 'Notifications',
-        component: Notifications
-      },
-      {
-        path: 'upgrade',
-        name: 'Upgrade to PRO',
-        component: Upgrade
       }
     ]
   },
