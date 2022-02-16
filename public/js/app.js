@@ -4135,9 +4135,11 @@ var changeItemStatus = function changeItemStatus(hash, status) {
     },
     setTaskItemAsDone: function setTaskItemAsDone(hash) {
       changeItemStatus(hash, 'T');
+      this.getData();
     },
     setTaskItemAsUndone: function setTaskItemAsUndone(hash) {
       changeItemStatus(hash, 'F');
+      this.getData();
     }
   }
 });
@@ -47389,88 +47391,99 @@ var render = function () {
                 [_vm._v("Criar lista")]
               ),
               _vm._v(" "),
-              _c("form", [
-                _c("div", { staticClass: "row" }, [
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function ($event) {
+                      $event.stopPropagation()
+                      $event.preventDefault()
+                      return _vm.handleSubmit.apply(null, arguments)
+                    },
+                  },
+                },
+                [
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col-md-12" },
+                      [
+                        _c("base-input", {
+                          attrs: {
+                            type: "text",
+                            label: "Título",
+                            placeholder: "Nome",
+                            required: "true",
+                          },
+                          model: {
+                            value: _vm.task.title,
+                            callback: function ($$v) {
+                              _vm.$set(_vm.task, "title", $$v)
+                            },
+                            expression: "task.title",
+                          },
+                        }),
+                      ],
+                      1
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col-md-12" },
+                      [
+                        _c("base-input", {
+                          attrs: {
+                            type: "text",
+                            label: "Descrição",
+                            placeholder: "Descrição",
+                            required: "true",
+                          },
+                          model: {
+                            value: _vm.task.description,
+                            callback: function ($$v) {
+                              _vm.$set(_vm.task, "description", $$v)
+                            },
+                            expression: "task.description",
+                          },
+                        }),
+                      ],
+                      1
+                    ),
+                  ]),
+                  _vm._v(" "),
                   _c(
                     "div",
-                    { staticClass: "col-md-12" },
+                    { staticClass: "text-center" },
                     [
-                      _c("base-input", {
-                        attrs: {
-                          type: "text",
-                          label: "Título",
-                          placeholder: "Nome",
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "btn btn-secondary btn-fill float-left",
+                          attrs: { to: { name: "tasks-lists" } },
                         },
-                        model: {
-                          value: _vm.task.title,
-                          callback: function ($$v) {
-                            _vm.$set(_vm.task, "title", $$v)
+                        [_vm._v("Voltar")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary btn-fill float-right",
+                          attrs: {
+                            type: "submit",
+                            disabled: _vm.inputDisabled,
                           },
-                          expression: "task.title",
                         },
-                      }),
+                        [_vm._v("\n                Atualizar\n              ")]
+                      ),
                     ],
                     1
                   ),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "row" }, [
-                  _c(
-                    "div",
-                    { staticClass: "col-md-12" },
-                    [
-                      _c("base-input", {
-                        attrs: {
-                          type: "email",
-                          label: "Descrição",
-                          placeholder: "Descrição",
-                        },
-                        model: {
-                          value: _vm.task.description,
-                          callback: function ($$v) {
-                            _vm.$set(_vm.task, "description", $$v)
-                          },
-                          expression: "task.description",
-                        },
-                      }),
-                    ],
-                    1
-                  ),
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "text-center" },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "btn btn-secondary btn-fill float-left",
-                        attrs: { to: { name: "tasks-lists" } },
-                      },
-                      [_vm._v("Voltar")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary btn-fill float-right",
-                        attrs: { type: "submit", disabled: _vm.inputDisabled },
-                        on: {
-                          click: function ($event) {
-                            $event.preventDefault()
-                            return _vm.handleSubmit.apply(null, arguments)
-                          },
-                        },
-                      },
-                      [_vm._v("\n                Atualizar\n              ")]
-                    ),
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "clearfix" }),
-              ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "clearfix" }),
+                ]
+              ),
             ]),
           ],
           1
@@ -47519,88 +47532,99 @@ var render = function () {
                 [_vm._v("Editar lista")]
               ),
               _vm._v(" "),
-              _c("form", [
-                _c("div", { staticClass: "row" }, [
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function ($event) {
+                      $event.stopPropagation()
+                      $event.preventDefault()
+                      return _vm.handleSubmit.apply(null, arguments)
+                    },
+                  },
+                },
+                [
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col-md-12" },
+                      [
+                        _c("base-input", {
+                          attrs: {
+                            type: "text",
+                            label: "Título",
+                            placeholder: "Nome",
+                            required: "true",
+                          },
+                          model: {
+                            value: _vm.task.title,
+                            callback: function ($$v) {
+                              _vm.$set(_vm.task, "title", $$v)
+                            },
+                            expression: "task.title",
+                          },
+                        }),
+                      ],
+                      1
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col-md-12" },
+                      [
+                        _c("base-input", {
+                          attrs: {
+                            type: "text",
+                            label: "Descrição",
+                            placeholder: "Descrição",
+                            required: "true",
+                          },
+                          model: {
+                            value: _vm.task.description,
+                            callback: function ($$v) {
+                              _vm.$set(_vm.task, "description", $$v)
+                            },
+                            expression: "task.description",
+                          },
+                        }),
+                      ],
+                      1
+                    ),
+                  ]),
+                  _vm._v(" "),
                   _c(
                     "div",
-                    { staticClass: "col-md-12" },
+                    { staticClass: "text-center" },
                     [
-                      _c("base-input", {
-                        attrs: {
-                          type: "text",
-                          label: "Título",
-                          placeholder: "Nome",
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "btn btn-secondary btn-fill float-left",
+                          attrs: { to: { name: "tasks-lists" } },
                         },
-                        model: {
-                          value: _vm.task.title,
-                          callback: function ($$v) {
-                            _vm.$set(_vm.task, "title", $$v)
+                        [_vm._v("Voltar")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary btn-fill float-right",
+                          attrs: {
+                            type: "submit",
+                            disabled: _vm.inputDisabled,
                           },
-                          expression: "task.title",
                         },
-                      }),
+                        [_vm._v("\n                Atualizar\n              ")]
+                      ),
                     ],
                     1
                   ),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "row" }, [
-                  _c(
-                    "div",
-                    { staticClass: "col-md-12" },
-                    [
-                      _c("base-input", {
-                        attrs: {
-                          type: "email",
-                          label: "Descrição",
-                          placeholder: "Descrição",
-                        },
-                        model: {
-                          value: _vm.task.description,
-                          callback: function ($$v) {
-                            _vm.$set(_vm.task, "description", $$v)
-                          },
-                          expression: "task.description",
-                        },
-                      }),
-                    ],
-                    1
-                  ),
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "text-center" },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "btn btn-secondary btn-fill float-left",
-                        attrs: { to: { name: "tasks-lists" } },
-                      },
-                      [_vm._v("Voltar")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary btn-fill float-right",
-                        attrs: { type: "submit", disabled: _vm.inputDisabled },
-                        on: {
-                          click: function ($event) {
-                            $event.preventDefault()
-                            return _vm.handleSubmit.apply(null, arguments)
-                          },
-                        },
-                      },
-                      [_vm._v("\n                Atualizar\n              ")]
-                    ),
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "clearfix" }),
-              ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "clearfix" }),
+                ]
+              ),
             ]),
           ],
           1
@@ -47971,69 +47995,79 @@ var render = function () {
                 [_vm._v("Editar item da lista")]
               ),
               _vm._v(" "),
-              _c("form", [
-                _c("div", { staticClass: "row" }, [
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function ($event) {
+                      $event.stopPropagation()
+                      $event.preventDefault()
+                      return _vm.handleSubmit.apply(null, arguments)
+                    },
+                  },
+                },
+                [
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col-md-12" },
+                      [
+                        _c("base-input", {
+                          attrs: {
+                            type: "text",
+                            label: "Título",
+                            placeholder: "Título",
+                            required: "true",
+                          },
+                          model: {
+                            value: _vm.taskItem.title,
+                            callback: function ($$v) {
+                              _vm.$set(_vm.taskItem, "title", $$v)
+                            },
+                            expression: "taskItem.title",
+                          },
+                        }),
+                      ],
+                      1
+                    ),
+                  ]),
+                  _vm._v(" "),
                   _c(
                     "div",
-                    { staticClass: "col-md-12" },
+                    { staticClass: "text-center" },
                     [
-                      _c("base-input", {
-                        attrs: {
-                          type: "text",
-                          label: "Título",
-                          placeholder: "Título",
-                        },
-                        model: {
-                          value: _vm.taskItem.title,
-                          callback: function ($$v) {
-                            _vm.$set(_vm.taskItem, "title", $$v)
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "btn btn-secondary btn-fill float-left",
+                          attrs: {
+                            to: {
+                              name: "view-task",
+                              params: { id: _vm.taskItem.taskId },
+                            },
                           },
-                          expression: "taskItem.title",
                         },
-                      }),
+                        [_vm._v("Voltar")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary btn-fill float-right",
+                          attrs: {
+                            type: "submit",
+                            disabled: _vm.inputDisabled,
+                          },
+                        },
+                        [_vm._v("\n                Atualizar\n              ")]
+                      ),
                     ],
                     1
                   ),
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "text-center" },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "btn btn-secondary btn-fill float-left",
-                        attrs: {
-                          to: {
-                            name: "view-task",
-                            params: { id: _vm.taskItem.taskId },
-                          },
-                        },
-                      },
-                      [_vm._v("Voltar")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary btn-fill float-right",
-                        attrs: { type: "submit", disabled: _vm.inputDisabled },
-                        on: {
-                          click: function ($event) {
-                            $event.preventDefault()
-                            return _vm.handleSubmit.apply(null, arguments)
-                          },
-                        },
-                      },
-                      [_vm._v("\n                Atualizar\n              ")]
-                    ),
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "clearfix" }),
-              ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "clearfix" }),
+                ]
+              ),
             ]),
           ],
           1
@@ -48835,110 +48869,121 @@ var render = function () {
                 [_vm._v("Criar usuário")]
               ),
               _vm._v(" "),
-              _c("form", [
-                _c("div", { staticClass: "row" }, [
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function ($event) {
+                      $event.stopPropagation()
+                      $event.preventDefault()
+                      return _vm.handleSubmit.apply(null, arguments)
+                    },
+                  },
+                },
+                [
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col-md-6" },
+                      [
+                        _c("base-input", {
+                          attrs: {
+                            type: "text",
+                            label: "Nome",
+                            placeholder: "Nome",
+                            required: "true",
+                          },
+                          model: {
+                            value: _vm.user.name,
+                            callback: function ($$v) {
+                              _vm.$set(_vm.user, "name", $$v)
+                            },
+                            expression: "user.name",
+                          },
+                        }),
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-md-6" },
+                      [
+                        _c("base-input", {
+                          attrs: {
+                            type: "email",
+                            label: "Email",
+                            placeholder: "Email",
+                            required: "true",
+                          },
+                          model: {
+                            value: _vm.user.email,
+                            callback: function ($$v) {
+                              _vm.$set(_vm.user, "email", $$v)
+                            },
+                            expression: "user.email",
+                          },
+                        }),
+                      ],
+                      1
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col-md-12" },
+                      [
+                        _c("base-input", {
+                          attrs: {
+                            type: "password",
+                            label: "Senha",
+                            placeholder: "Senha",
+                          },
+                          model: {
+                            value: _vm.user.password,
+                            callback: function ($$v) {
+                              _vm.$set(_vm.user, "password", $$v)
+                            },
+                            expression: "user.password",
+                          },
+                        }),
+                      ],
+                      1
+                    ),
+                  ]),
+                  _vm._v(" "),
                   _c(
                     "div",
-                    { staticClass: "col-md-6" },
+                    { staticClass: "text-center" },
                     [
-                      _c("base-input", {
-                        attrs: {
-                          type: "text",
-                          label: "Nome",
-                          placeholder: "Nome",
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "btn btn-secondary btn-fill float-left",
+                          attrs: { to: { name: "users" } },
                         },
-                        model: {
-                          value: _vm.user.name,
-                          callback: function ($$v) {
-                            _vm.$set(_vm.user, "name", $$v)
+                        [_vm._v("Voltar")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary btn-fill float-right",
+                          attrs: {
+                            type: "submit",
+                            disabled: _vm.inputDisabled,
                           },
-                          expression: "user.name",
                         },
-                      }),
+                        [_vm._v("\n                Criar\n              ")]
+                      ),
                     ],
                     1
                   ),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-md-6" },
-                    [
-                      _c("base-input", {
-                        attrs: {
-                          type: "email",
-                          label: "Email",
-                          placeholder: "Email",
-                        },
-                        model: {
-                          value: _vm.user.email,
-                          callback: function ($$v) {
-                            _vm.$set(_vm.user, "email", $$v)
-                          },
-                          expression: "user.email",
-                        },
-                      }),
-                    ],
-                    1
-                  ),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "row" }, [
-                  _c(
-                    "div",
-                    { staticClass: "col-md-12" },
-                    [
-                      _c("base-input", {
-                        attrs: {
-                          type: "password",
-                          label: "Senha",
-                          placeholder: "Senha",
-                        },
-                        model: {
-                          value: _vm.user.password,
-                          callback: function ($$v) {
-                            _vm.$set(_vm.user, "password", $$v)
-                          },
-                          expression: "user.password",
-                        },
-                      }),
-                    ],
-                    1
-                  ),
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "text-center" },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "btn btn-secondary btn-fill float-left",
-                        attrs: { to: { name: "users" } },
-                      },
-                      [_vm._v("Voltar")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary btn-fill float-right",
-                        attrs: { type: "submit", disabled: _vm.inputDisabled },
-                        on: {
-                          click: function ($event) {
-                            $event.preventDefault()
-                            return _vm.handleSubmit.apply(null, arguments)
-                          },
-                        },
-                      },
-                      [_vm._v("\n                Criar\n              ")]
-                    ),
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "clearfix" }),
-              ]),
+                  _c("div", { staticClass: "clearfix" }),
+                ]
+              ),
             ]),
           ],
           1
@@ -48987,110 +49032,121 @@ var render = function () {
                 [_vm._v("Editar usuário")]
               ),
               _vm._v(" "),
-              _c("form", [
-                _c("div", { staticClass: "row" }, [
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function ($event) {
+                      $event.stopPropagation()
+                      $event.preventDefault()
+                      return _vm.handleSubmit.apply(null, arguments)
+                    },
+                  },
+                },
+                [
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col-md-6" },
+                      [
+                        _c("base-input", {
+                          attrs: {
+                            type: "text",
+                            label: "Nome",
+                            placeholder: "Nome",
+                            required: "true",
+                          },
+                          model: {
+                            value: _vm.user.name,
+                            callback: function ($$v) {
+                              _vm.$set(_vm.user, "name", $$v)
+                            },
+                            expression: "user.name",
+                          },
+                        }),
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-md-6" },
+                      [
+                        _c("base-input", {
+                          attrs: {
+                            type: "email",
+                            label: "Email",
+                            placeholder: "Email",
+                            required: "true",
+                          },
+                          model: {
+                            value: _vm.user.email,
+                            callback: function ($$v) {
+                              _vm.$set(_vm.user, "email", $$v)
+                            },
+                            expression: "user.email",
+                          },
+                        }),
+                      ],
+                      1
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col-md-12" },
+                      [
+                        _c("base-input", {
+                          attrs: {
+                            type: "password",
+                            label: "Senha",
+                            placeholder: "Senha",
+                          },
+                          model: {
+                            value: _vm.user.password,
+                            callback: function ($$v) {
+                              _vm.$set(_vm.user, "password", $$v)
+                            },
+                            expression: "user.password",
+                          },
+                        }),
+                      ],
+                      1
+                    ),
+                  ]),
+                  _vm._v(" "),
                   _c(
                     "div",
-                    { staticClass: "col-md-6" },
+                    { staticClass: "text-center" },
                     [
-                      _c("base-input", {
-                        attrs: {
-                          type: "text",
-                          label: "Nome",
-                          placeholder: "Nome",
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "btn btn-secondary btn-fill float-left",
+                          attrs: { to: { name: "users" } },
                         },
-                        model: {
-                          value: _vm.user.name,
-                          callback: function ($$v) {
-                            _vm.$set(_vm.user, "name", $$v)
+                        [_vm._v("Voltar")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary btn-fill float-right",
+                          attrs: {
+                            type: "submit",
+                            disabled: _vm.inputDisabled,
                           },
-                          expression: "user.name",
                         },
-                      }),
+                        [_vm._v("\n                Atualizar\n              ")]
+                      ),
                     ],
                     1
                   ),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-md-6" },
-                    [
-                      _c("base-input", {
-                        attrs: {
-                          type: "email",
-                          label: "Email",
-                          placeholder: "Email",
-                        },
-                        model: {
-                          value: _vm.user.email,
-                          callback: function ($$v) {
-                            _vm.$set(_vm.user, "email", $$v)
-                          },
-                          expression: "user.email",
-                        },
-                      }),
-                    ],
-                    1
-                  ),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "row" }, [
-                  _c(
-                    "div",
-                    { staticClass: "col-md-12" },
-                    [
-                      _c("base-input", {
-                        attrs: {
-                          type: "password",
-                          label: "Senha",
-                          placeholder: "Senha",
-                        },
-                        model: {
-                          value: _vm.user.password,
-                          callback: function ($$v) {
-                            _vm.$set(_vm.user, "password", $$v)
-                          },
-                          expression: "user.password",
-                        },
-                      }),
-                    ],
-                    1
-                  ),
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "text-center" },
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "btn btn-secondary btn-fill float-left",
-                        attrs: { to: { name: "users" } },
-                      },
-                      [_vm._v("Voltar")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary btn-fill float-right",
-                        attrs: { type: "submit", disabled: _vm.inputDisabled },
-                        on: {
-                          click: function ($event) {
-                            $event.preventDefault()
-                            return _vm.handleSubmit.apply(null, arguments)
-                          },
-                        },
-                      },
-                      [_vm._v("\n                Atualizar\n              ")]
-                    ),
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "clearfix" }),
-              ]),
+                  _c("div", { staticClass: "clearfix" }),
+                ]
+              ),
             ]),
           ],
           1
