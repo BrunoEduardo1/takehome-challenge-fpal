@@ -76,7 +76,6 @@ export default {
         .catch((err) => {
           this.$router.push({ name: 'Login' });
         });
-      console.log('SAIR');
     }
   }
 };

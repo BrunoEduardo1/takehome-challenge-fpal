@@ -31,7 +31,7 @@ class TasksListsController extends Controller
             if ($createdItem->exists) {
                 return response()->json([
                     'success' => true,
-                    'message' => trans('success'),
+                    'message' => trans('messages.success'),
                     'item_id' => $createdItem->id,
                 ], 201);
             }
@@ -44,7 +44,7 @@ class TasksListsController extends Controller
 
         return response()->json([
             'success' => false,
-            'message' => trans('error'),
+            'message' => trans('messages.error'),
             // 'debug' => $errMsg,
         ], 200);
 
@@ -109,13 +109,13 @@ class TasksListsController extends Controller
         if ($updatedTaskList) {
             return response()->json([
                 'success' => true,
-                'message' => trans('success'),
+                'message' => trans('messages.success'),
             ], 200);
         }
 
         return response()->json([
             'success' => false,
-            'message' => trans('error'),
+            'message' => trans('messages.error'),
         ], 422);
     }
 
@@ -126,13 +126,13 @@ class TasksListsController extends Controller
         if ($deletedTaskList) {
             return response()->json([
                 'success' => true,
-                'message' => trans('success'),
+                'message' => trans('messages.success'),
             ], 200);
         }
 
         return response()->json([
             'success' => false,
-            'message' => trans('error'),
+            'message' => trans('messages.error'),
         ], 404);
 
     }

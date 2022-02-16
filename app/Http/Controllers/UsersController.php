@@ -31,7 +31,7 @@ class UsersController extends Controller
             if ($createdUser->exists) {
                 return response()->json([
                     'success' => true,
-                    'message' => trans('success'),
+                    'message' => trans('messages.success'),
                     'item_id' => $createdUser->id,
                 ], 201);
             }
@@ -44,7 +44,7 @@ class UsersController extends Controller
 
         return response()->json([
             'success' => false,
-            'message' => trans('error'),
+            'message' => trans('messages.error'),
             // 'debug' => $errMsg,
         ], 200);
 
@@ -95,13 +95,13 @@ class UsersController extends Controller
         if ($updatedUser) {
             return response()->json([
                 'success' => true,
-                'message' => trans('success'),
+                'message' => trans('messages.success'),
             ], 200);
         }
 
         return response()->json([
             'success' => false,
-            'message' => trans('error'),
+            'message' => trans('messages.error'),
         ], 422);
     }
 
@@ -112,13 +112,13 @@ class UsersController extends Controller
         if ($deletedUser) {
             return response()->json([
                 'success' => true,
-                'message' => trans('success'),
+                'message' => trans('messages.success'),
             ], 200);
         }
 
         return response()->json([
             'success' => false,
-            'message' => trans('error'),
+            'message' => trans('messages.error'),
         ], 404);
 
     }
