@@ -2725,7 +2725,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     backgroundImage: {
       type: String,
-      "default": 'img/sidebar-5.jpg'
+      "default": ''
     },
     activeColor: {
       type: String,
@@ -2931,7 +2931,11 @@ __webpack_require__.r(__webpack_exports__);
     tableData: Object,
     title: String,
     description: String,
-    footerData: String
+    footerData: String,
+    hideDeleButton: {
+      type: Boolean,
+      "default": false
+    }
   },
   emits: ['set-task-as-done', 'set-task-as-undone', 'delete-item-id'],
   methods: {
@@ -3072,6 +3076,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/dist/js.cookie.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -3081,8 +3087,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'mobile-menu'
+  name: 'mobile-menu',
+  methods: {
+    logout: function logout() {
+      var _this = this;
+
+      var token = js_cookie__WEBPACK_IMPORTED_MODULE_0___default.a.get('_task_token');
+      axios.post("api/logout", {}, {
+        headers: {
+          Authorization: "Bearer ".concat(token)
+        }
+      }).then(function (response) {
+        _this.$router.push({
+          name: 'Login'
+        });
+      })["catch"](function (err) {
+        _this.$router.push({
+          name: 'Login'
+        });
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -3096,6 +3123,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/dist/js.cookie.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -3124,18 +3153,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      activeNotifications: false
+    };
+  },
   computed: {
     routeName: function routeName() {
       var name = this.$route.name;
       return this.capitalizeFirstLetter(name);
     }
-  },
-  data: function data() {
-    return {
-      activeNotifications: false
-    };
   },
   methods: {
     capitalizeFirstLetter: function capitalizeFirstLetter(string) {
@@ -3152,6 +3181,24 @@ __webpack_require__.r(__webpack_exports__);
     },
     hideSidebar: function hideSidebar() {
       this.$sidebar.displaySidebar(false);
+    },
+    logout: function logout() {
+      var _this = this;
+
+      var token = js_cookie__WEBPACK_IMPORTED_MODULE_0___default.a.get('_task_token');
+      axios.post("api/logout", {}, {
+        headers: {
+          Authorization: "Bearer ".concat(token)
+        }
+      }).then(function (response) {
+        _this.$router.push({
+          name: 'Login'
+        });
+      })["catch"](function (err) {
+        _this.$router.push({
+          name: 'Login'
+        });
+      });
     }
   }
 });
@@ -3814,8 +3861,8 @@ __webpack_require__.r(__webpack_exports__);
   name: 'Login',
   data: function data() {
     return {
-      email: 'zfahey@example.org',
-      password: 'password'
+      email: '',
+      password: ''
     };
   },
   methods: {
@@ -3834,7 +3881,7 @@ __webpack_require__.r(__webpack_exports__);
         });
 
         _this.$notifications.notify({
-          message: "Welcome",
+          message: "Bem vindo",
           horizontalAlign: 'left',
           verticalAlign: 'top',
           type: 'success'
@@ -4018,205 +4065,80 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_Cards_StatsCard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Cards/StatsCard.vue */ "./resources/js/template/components/Cards/StatsCard.vue");
-/* harmony import */ var _components_Table_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Table.vue */ "./resources/js/template/components/Table.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-// import ChartCard from '../components/Cards/ChartCard.vue'
+/* harmony import */ var _components_Tasks_ItemsList_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Tasks/ItemsList.vue */ "./resources/js/template/components/Tasks/ItemsList.vue");
+/* harmony import */ var _components_Cards_StatsCard_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Cards/StatsCard.vue */ "./resources/js/template/components/Cards/StatsCard.vue");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/dist/js.cookie.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_2__);
 
+
+
+
+var changeItemStatus = function changeItemStatus(hash, status) {
+  var token = js_cookie__WEBPACK_IMPORTED_MODULE_2___default.a.get('_task_token');
+  var config = {
+    headers: {
+      Authorization: "Bearer ".concat(token)
+    }
+  };
+  axios.put("api/tasks/items/update/".concat(hash), {
+    done: status
+  }, config).then(function (response) {})["catch"](function (err) {
+    console.log(err.data);
+  });
+};
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    LTable: _components_Table_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    // ChartCard,
-    StatsCard: _components_Cards_StatsCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    StatsCard: _components_Cards_StatsCard_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    ItemsList: _components_Tasks_ItemsList_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
     return {
-      editTooltip: 'Edit Task',
-      deleteTooltip: 'Remove',
-      pieChart: {
-        data: {
-          labels: ['40%', '20%', '40%'],
-          series: [40, 20, 40]
-        }
-      },
-      lineChart: {
-        data: {
-          labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM', '3:00AM', '6:00AM'],
-          series: [[287, 385, 490, 492, 554, 586, 698, 695], [67, 152, 143, 240, 287, 335, 435, 437], [23, 113, 67, 108, 190, 239, 307, 308]]
-        },
-        options: {
-          low: 0,
-          high: 800,
-          showArea: false,
-          height: '245px',
-          axisX: {
-            showGrid: false
-          },
-          lineSmooth: true,
-          showLine: true,
-          showPoint: true,
-          fullWidth: true,
-          chartPadding: {
-            right: 50
-          }
-        },
-        responsiveOptions: [['screen and (max-width: 640px)', {
-          axisX: {
-            labelInterpolationFnc: function labelInterpolationFnc(value) {
-              return value[0];
-            }
-          }
-        }]]
-      },
-      barChart: {
-        data: {
-          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-          series: [[542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895], [412, 243, 280, 580, 453, 353, 300, 364, 368, 410, 636, 695]]
-        },
-        options: {
-          seriesBarDistance: 10,
-          axisX: {
-            showGrid: false
-          },
-          height: '245px'
-        },
-        responsiveOptions: [['screen and (max-width: 640px)', {
-          seriesBarDistance: 5,
-          axisX: {
-            labelInterpolationFnc: function labelInterpolationFnc(value) {
-              return value[0];
-            }
-          }
-        }]]
-      },
-      tableData: {
-        data: [{
-          title: 'Sign contract for "What are conference organizers afraid of?"',
-          checked: false
-        }, {
-          title: 'Lines From Great Russian Literature? Or E-mails From My Boss?',
-          checked: true
-        }, {
-          title: 'Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit',
-          checked: true
-        }, {
-          title: 'Create 4 Invisible User Experiences you Never Knew About',
-          checked: false
-        }, {
-          title: 'Read "Following makes Medium better"',
-          checked: false
-        }, {
-          title: 'Unfollow 5 enemies from twitter',
-          checked: false
-        }]
-      }
+      usersCount: 0,
+      tasksListsCount: 0,
+      pendingTasksCount: 0,
+      finishedTasksCount: 0,
+      tasksLists: []
     };
+  },
+  mounted: function mounted() {
+    this.getData();
+  },
+  methods: {
+    getData: function getData() {
+      var _this = this;
+
+      var token = js_cookie__WEBPACK_IMPORTED_MODULE_2___default.a.get('_task_token');
+      var config = {
+        headers: {
+          Authorization: "Bearer ".concat(token)
+        }
+      };
+      axios.get("api/dashboard/getData", config).then(function (response) {
+        if (response.data.success) {
+          var responseData = response.data.items;
+          _this.usersCount = responseData.users_count;
+          _this.tasksListsCount = responseData.tasks_lists_count;
+          _this.pendingTasksCount = responseData.pending_tasks_count;
+          _this.finishedTasksCount = responseData.finished_tasks_count;
+          _this.tasksLists = responseData.tasks_lists;
+        }
+      })["catch"](function (err) {
+        if (err.response.status == 401) {
+          _this.$router.push({
+            name: 'Login'
+          });
+        } else {
+          console.log('Error getting the dashboard data:', err.message);
+        }
+      });
+    },
+    setTaskItemAsDone: function setTaskItemAsDone(hash) {
+      changeItemStatus(hash, 'T');
+    },
+    setTaskItemAsUndone: function setTaskItemAsUndone(hash) {
+      changeItemStatus(hash, 'F');
+    }
   }
 });
 
@@ -4235,7 +4157,7 @@ __webpack_require__.r(__webpack_exports__);
   name: 'RecoverPassword',
   data: function data() {
     return {
-      email: 'bruno_test@test.com',
+      email: '',
       inputDisabled: false
     };
   },
@@ -4257,7 +4179,6 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         _this.$notifications.notify({
           message: "".concat(err.response.data.error),
-          // icon: 'nc-icon nc-app',
           horizontalAlign: 'left',
           verticalAlign: 'top',
           type: 'danger'
@@ -4285,9 +4206,9 @@ __webpack_require__.r(__webpack_exports__);
   name: 'Register',
   data: function data() {
     return {
-      name: 'Bruno',
-      email: 'zfahey@example.org',
-      password: 'password'
+      name: '',
+      email: '',
+      password: ''
     };
   },
   methods: {
@@ -4313,7 +4234,6 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         _this.$notifications.notify({
           message: "".concat(err.response.data.message),
-          // icon: 'nc-icon nc-app',
           horizontalAlign: 'left',
           verticalAlign: 'top',
           type: 'danger'
@@ -4341,8 +4261,8 @@ __webpack_require__.r(__webpack_exports__);
       email: this.$route.params.email,
       token: this.$route.params.token,
       inputDisabled: false,
-      password: '123123aa',
-      password_confirmation: '123123aa'
+      password: '',
+      password_confirmation: ''
     };
   },
   methods: {
@@ -4370,7 +4290,6 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         _this.$notifications.notify({
           message: "".concat(err.response.data.message),
-          // icon: 'nc-icon nc-app',
           horizontalAlign: 'left',
           verticalAlign: 'top',
           type: 'danger'
@@ -4762,7 +4681,6 @@ var tableColumns = [{
       })["catch"](function (err) {
         _this.$notifications.notify({
           message: "".concat(err.response.data.message),
-          // icon: 'nc-icon nc-app',
           horizontalAlign: 'left',
           verticalAlign: 'top',
           type: 'danger'
@@ -5767,7 +5685,7 @@ var tableColumns = [{
   },
   methods: {
     setCurrentItemForConfirmation: function setCurrentItemForConfirmation(id) {
-      this.confirmDeleteId = id;
+      this.confirmDeleteId = "".concat(id);
     },
     deleteConfirmedItem: function deleteConfirmedItem(id) {
       var _this = this;
@@ -43134,7 +43052,7 @@ var render = function () {
   return _c("card", { staticClass: "card-stats" }, [
     _c("div", { staticClass: "row" }, [
       _vm.$slots.header
-        ? _c("div", { staticClass: "col-5" }, [
+        ? _c("div", { staticClass: "col-3" }, [
             _c(
               "div",
               { staticClass: "icon-big text-center" },
@@ -43145,7 +43063,7 @@ var render = function () {
         : _vm._e(),
       _vm._v(" "),
       _vm.$slots.content
-        ? _c("div", { staticClass: "col-7" }, [
+        ? _c("div", { staticClass: "col-9" }, [
             _c("div", { staticClass: "numbers" }, [_vm._t("content")], 2),
           ])
         : _vm._e(),
@@ -43744,10 +43662,7 @@ var render = function () {
     {
       staticClass: "sidebar",
       style: _vm.sidebarStyle,
-      attrs: {
-        "data-color": _vm.backgroundColor,
-        "data-image": _vm.backgroundImage,
-      },
+      attrs: { "data-color": _vm.backgroundColor },
     },
     [
       _c(
@@ -43961,10 +43876,10 @@ var render = function () {
                                     },
                                     nativeOn: {
                                       click: function ($event) {
-                                        return _vm.clickListener(
+                                        _vm.clickListener(
                                           action.key,
                                           action.path + "/" + item.id,
-                                          item.id
+                                          item.hash ? item.hash : item.id
                                         )
                                       },
                                     },
@@ -44163,30 +44078,36 @@ var render = function () {
                                   ]
                                 ),
                                 _vm._v(" "),
-                                _c(
-                                  "router-link",
-                                  {
-                                    staticClass: "btn btn-danger btn-sm mr-2",
-                                    attrs: {
-                                      "data-toggle": "modal",
-                                      "data-target": "#confirm-delete-modal",
-                                      to: "api/tasks/items/delete/" + row.hash,
-                                      event: "",
-                                      title: "Deletar",
-                                    },
-                                    nativeOn: {
-                                      click: function ($event) {
-                                        return _vm.clickListener(row.hash)
+                                !_vm.hideDeleButton
+                                  ? _c(
+                                      "router-link",
+                                      {
+                                        staticClass:
+                                          "btn btn-danger btn-sm mr-2",
+                                        attrs: {
+                                          "data-toggle": "modal",
+                                          "data-target":
+                                            "#confirm-delete-modal",
+                                          to:
+                                            "api/tasks/items/delete/" +
+                                            row.hash,
+                                          event: "",
+                                          title: "Deletar",
+                                        },
+                                        nativeOn: {
+                                          click: function ($event) {
+                                            return _vm.clickListener(row.hash)
+                                          },
+                                        },
                                       },
-                                    },
-                                  },
-                                  [
-                                    _c("i", {
-                                      staticClass: "bi bi-trash",
-                                      attrs: { "aria-label": "Deletar" },
-                                    }),
-                                  ]
-                                ),
+                                      [
+                                        _c("i", {
+                                          staticClass: "bi bi-trash",
+                                          attrs: { "aria-label": "Deletar" },
+                                        }),
+                                      ]
+                                    )
+                                  : _vm._e(),
                               ],
                               1
                             ),
@@ -44199,7 +44120,7 @@ var render = function () {
               ],
               null,
               false,
-              162769345
+              3844484577
             ),
           })
         : _vm._e(),
@@ -44379,22 +44300,21 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("ul", { staticClass: "nav nav-mobile-menu" }, [
+    _c("li", { staticClass: "nav-item" }, [
+      _c(
+        "a",
+        {
+          staticClass: "nav-link",
+          attrs: { href: "#" },
+          on: { click: _vm.logout },
+        },
+        [_c("span", { staticClass: "no-icon" }, [_vm._v("Sair")])]
+      ),
+    ]),
+  ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("ul", { staticClass: "nav nav-mobile-menu" }, [
-      _c("li", { staticClass: "nav-item" }, [
-        _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-          _c("span", { staticClass: "no-icon" }, [_vm._v("Sair")]),
-        ]),
-      ]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -44442,32 +44362,31 @@ var render = function () {
         ]
       ),
       _vm._v(" "),
-      _vm._m(0),
+      _c(
+        "div",
+        { staticClass: "collapse navbar-collapse justify-content-end" },
+        [
+          _c("ul", { staticClass: "nav navbar-nav mr-auto" }),
+          _vm._v(" "),
+          _c("ul", { staticClass: "navbar-nav ml-auto" }, [
+            _c("li", { staticClass: "nav-item" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-link",
+                  attrs: { href: "#" },
+                  on: { click: _vm.logout },
+                },
+                [_vm._v(" Sair ")]
+              ),
+            ]),
+          ]),
+        ]
+      ),
     ]),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "collapse navbar-collapse justify-content-end" },
-      [
-        _c("ul", { staticClass: "nav navbar-nav mr-auto" }),
-        _vm._v(" "),
-        _c("ul", { staticClass: "navbar-nav ml-auto" }, [
-          _c("li", { staticClass: "nav-item" }, [
-            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-              _vm._v("\n            Sair\n          "),
-            ]),
-          ]),
-        ]),
-      ]
-    )
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -46618,18 +46537,15 @@ var render = function () {
                   attrs: { slot: "header" },
                   slot: "header",
                 },
-                [_c("i", { staticClass: "nc-icon nc-chart text-warning" })]
+                [_c("i", { staticClass: "bi bi-people-fill" })]
               ),
               _vm._v(" "),
               _c("div", { attrs: { slot: "content" }, slot: "content" }, [
-                _c("p", { staticClass: "card-category" }, [_vm._v("Capacity")]),
+                _c("p", { staticClass: "card-category" }, [_vm._v("Usuários")]),
                 _vm._v(" "),
-                _c("h4", { staticClass: "card-title" }, [_vm._v("105GB")]),
-              ]),
-              _vm._v(" "),
-              _c("div", { attrs: { slot: "footer" }, slot: "footer" }, [
-                _c("i", { staticClass: "fa fa-refresh" }),
-                _vm._v("Updated now\n          "),
+                _c("h4", { staticClass: "card-title" }, [
+                  _vm._v(_vm._s(_vm.usersCount)),
+                ]),
               ]),
             ]),
           ],
@@ -46648,18 +46564,17 @@ var render = function () {
                   attrs: { slot: "header" },
                   slot: "header",
                 },
-                [_c("i", { staticClass: "nc-icon nc-light-3 text-success" })]
+                [_c("i", { staticClass: "bi bi-list" })]
               ),
               _vm._v(" "),
               _c("div", { attrs: { slot: "content" }, slot: "content" }, [
-                _c("p", { staticClass: "card-category" }, [_vm._v("Revenue")]),
+                _c("p", { staticClass: "card-category" }, [
+                  _vm._v("Listas de Tarefas"),
+                ]),
                 _vm._v(" "),
-                _c("h4", { staticClass: "card-title" }, [_vm._v("$1,345")]),
-              ]),
-              _vm._v(" "),
-              _c("div", { attrs: { slot: "footer" }, slot: "footer" }, [
-                _c("i", { staticClass: "fa fa-calendar-o" }),
-                _vm._v("Last day\n          "),
+                _c("h4", { staticClass: "card-title" }, [
+                  _vm._v(_vm._s(_vm.tasksListsCount)),
+                ]),
               ]),
             ]),
           ],
@@ -46678,18 +46593,17 @@ var render = function () {
                   attrs: { slot: "header" },
                   slot: "header",
                 },
-                [_c("i", { staticClass: "nc-icon nc-vector text-danger" })]
+                [_c("i", { staticClass: "bi bi-list-ul" })]
               ),
               _vm._v(" "),
               _c("div", { attrs: { slot: "content" }, slot: "content" }, [
-                _c("p", { staticClass: "card-category" }, [_vm._v("Errors")]),
+                _c("p", { staticClass: "card-category" }, [
+                  _vm._v("Tarefas pendentes"),
+                ]),
                 _vm._v(" "),
-                _c("h4", { staticClass: "card-title" }, [_vm._v("23")]),
-              ]),
-              _vm._v(" "),
-              _c("div", { attrs: { slot: "footer" }, slot: "footer" }, [
-                _c("i", { staticClass: "fa fa-clock-o" }),
-                _vm._v("Last day\n          "),
+                _c("h4", { staticClass: "card-title" }, [
+                  _vm._v(_vm._s(_vm.pendingTasksCount)),
+                ]),
               ]),
             ]),
           ],
@@ -46708,24 +46622,17 @@ var render = function () {
                   attrs: { slot: "header" },
                   slot: "header",
                 },
-                [
-                  _c("i", {
-                    staticClass: "nc-icon nc-favourite-28 text-primary",
-                  }),
-                ]
+                [_c("i", { staticClass: "bi bi-list-check" })]
               ),
               _vm._v(" "),
               _c("div", { attrs: { slot: "content" }, slot: "content" }, [
                 _c("p", { staticClass: "card-category" }, [
-                  _vm._v("Followers"),
+                  _vm._v("Tarefas concluídas"),
                 ]),
                 _vm._v(" "),
-                _c("h4", { staticClass: "card-title" }, [_vm._v("+45")]),
-              ]),
-              _vm._v(" "),
-              _c("div", { attrs: { slot: "footer" }, slot: "footer" }, [
-                _c("i", { staticClass: "fa fa-refresh" }),
-                _vm._v("Updated now\n          "),
+                _c("h4", { staticClass: "card-title" }, [
+                  _vm._v(_vm._s(_vm.finishedTasksCount)),
+                ]),
               ]),
             ]),
           ],
@@ -46733,119 +46640,136 @@ var render = function () {
         ),
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c(
-          "div",
-          { staticClass: "col-md-6" },
-          [
-            _c(
-              "card",
-              [
-                _c("template", { slot: "header" }, [
-                  _c("h5", { staticClass: "title" }, [_vm._v("Tasks")]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "category" }, [
-                    _vm._v("Backend development"),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c(
-                  "l-table",
-                  {
-                    attrs: {
-                      data: _vm.tableData.data,
-                      columns: _vm.tableData.columns,
-                    },
-                    scopedSlots: _vm._u([
-                      {
-                        key: "default",
-                        fn: function (ref) {
-                          var row = ref.row
-                          return [
-                            _c(
-                              "td",
-                              [
-                                _c("base-checkbox", {
-                                  model: {
-                                    value: row.checked,
-                                    callback: function ($$v) {
-                                      _vm.$set(row, "checked", $$v)
-                                    },
-                                    expression: "row.checked",
-                                  },
-                                }),
-                              ],
-                              1
+      !_vm.tasksLists.length
+        ? _c("div", { staticClass: "row" }, [_vm._m(0)])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.tasksLists.length
+        ? _c(
+            "div",
+            { staticClass: "row" },
+            [
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._l(_vm.tasksLists, function (taskList) {
+                return _c(
+                  "div",
+                  { key: taskList.id, staticClass: "col-md-6" },
+                  [
+                    _c(
+                      "card",
+                      [
+                        _c("template", { slot: "header" }, [
+                          _c("h5", { staticClass: "title" }, [
+                            _vm._v(_vm._s(taskList.title)),
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "category" }, [
+                            _vm._v(
+                              "\n              " +
+                                _vm._s(
+                                  taskList.description.length > 95
+                                    ? taskList.description.substring(0, 95) +
+                                        "..."
+                                    : taskList.description
+                                ) +
+                                "\n            "
                             ),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(row.title))]),
-                            _vm._v(" "),
-                            _c("td", { staticClass: "td-actions text-right" }, [
-                              _c(
-                                "button",
-                                {
-                                  directives: [
-                                    {
-                                      name: "tooltip",
-                                      rawName: "v-tooltip.top-center",
-                                      value: _vm.editTooltip,
-                                      expression: "editTooltip",
-                                      modifiers: { "top-center": true },
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            [
+                              taskList.items.length
+                                ? _c("items-list", {
+                                    attrs: {
+                                      tableData: {
+                                        data: taskList.items,
+                                        columns: [{ key: "title", header: "" }],
+                                        actions: [],
+                                      },
+                                      hideDeleButton: true,
                                     },
-                                  ],
-                                  staticClass: "btn-simple btn btn-xs btn-info",
-                                  attrs: { type: "button" },
-                                },
-                                [_c("i", { staticClass: "fa fa-edit" })]
-                              ),
+                                    on: {
+                                      "set-task-as-done": _vm.setTaskItemAsDone,
+                                      "set-task-as-undone":
+                                        _vm.setTaskItemAsUndone,
+                                    },
+                                  })
+                                : _vm._e(),
                               _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  directives: [
+                              !taskList.items.length
+                                ? _c(
+                                    "div",
                                     {
-                                      name: "tooltip",
-                                      rawName: "v-tooltip.top-center",
-                                      value: _vm.deleteTooltip,
-                                      expression: "deleteTooltip",
-                                      modifiers: { "top-center": true },
+                                      staticClass:
+                                        "alert alert-primary text-center",
+                                      attrs: { role: "alert" },
                                     },
-                                  ],
-                                  staticClass:
-                                    "btn-simple btn btn-xs btn-danger",
-                                  attrs: { type: "button" },
-                                },
-                                [_c("i", { staticClass: "fa fa-times" })]
-                              ),
-                            ]),
-                          ]
-                        },
-                      },
-                    ]),
-                  },
-                  [_c("template", { slot: "columns" })],
-                  2
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "footer" }, [
-                  _c("hr"),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "stats" }, [
-                    _c("i", { staticClass: "fa fa-history" }),
-                    _vm._v(" Updated 3 minutes ago\n            "),
-                  ]),
-                ]),
-              ],
-              2
-            ),
-          ],
-          1
-        ),
-      ]),
+                                    [
+                                      _c("i", {
+                                        staticClass: "bi bi-info-circle",
+                                      }),
+                                      _vm._v(
+                                        " Nenhuma tarefa adicionada a lista\n              "
+                                      ),
+                                    ]
+                                  )
+                                : _vm._e(),
+                            ],
+                            1
+                          ),
+                        ]),
+                      ],
+                      2
+                    ),
+                  ],
+                  1
+                )
+              }),
+            ],
+            2
+          )
+        : _vm._e(),
     ]),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 mb-2" }, [
+      _c("h5", [
+        _c("i", { staticClass: "bi bi-list" }),
+        _vm._v("Listas de tarefas mais recentes"),
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "alert alert-primary text-center",
+          attrs: { role: "alert" },
+        },
+        [
+          _c("i", { staticClass: "bi bi-info-circle" }),
+          _vm._v(" Nenhuma lista de tarefas cadastrada\n        "),
+        ]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 mb-2" }, [
+      _c("h5", [
+        _c("i", { staticClass: "bi bi-list" }),
+        _vm._v("Listas de tarefas mais recentes"),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -47111,7 +47035,7 @@ var render = function () {
                 staticClass: "w-100 btn btn-lg btn-success",
                 attrs: { type: "submit" },
               },
-              [_vm._v("\n        Finalizar\n      ")]
+              [_vm._v("Finalizar")]
             ),
           ]
         ),
@@ -47740,7 +47664,7 @@ var render = function () {
                                 "btn btn-sm btn-secondary btn-fill float-right",
                               attrs: { to: { name: "create-task" } },
                             },
-                            [_vm._v("Novo")]
+                            [_vm._v("Criar")]
                           ),
                         ],
                         1
@@ -47748,36 +47672,57 @@ var render = function () {
                     ]),
                   ]),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "table-responsive" },
-                    [
-                      _c("l-table", {
-                        staticClass: "table-hover",
-                        attrs: {
-                          columns: _vm.table.columns,
-                          data: _vm.table.data,
-                          actions: _vm.table.actions,
-                        },
-                        on: {
-                          "delete-item-id": _vm.setCurrentItemForConfirmation,
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c(
+                  _vm.table.data.length
+                    ? _c(
                         "div",
-                        { staticClass: "text-right" },
+                        { staticClass: "table-responsive" },
                         [
-                          _c("pagination", {
-                            attrs: { pagination: _vm.table.pagination },
-                            on: { paginate: _vm.getTableData },
+                          _c("l-table", {
+                            staticClass: "table-hover",
+                            attrs: {
+                              columns: _vm.table.columns,
+                              data: _vm.table.data,
+                              actions: _vm.table.actions,
+                            },
+                            on: {
+                              "delete-item-id":
+                                _vm.setCurrentItemForConfirmation,
+                            },
                           }),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "text-right" },
+                            [
+                              _c("pagination", {
+                                attrs: { pagination: _vm.table.pagination },
+                                on: { paginate: _vm.getTableData },
+                              }),
+                            ],
+                            1
+                          ),
                         ],
                         1
-                      ),
-                    ],
-                    1
-                  ),
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  !_vm.table.data.length
+                    ? _c("div", [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "alert alert-primary text-center",
+                            attrs: { role: "alert" },
+                          },
+                          [
+                            _c("i", { staticClass: "bi bi-info-circle" }),
+                            _vm._v(
+                              " Nenhuma lista de tarefas cadastrada\n            "
+                            ),
+                          ]
+                        ),
+                      ])
+                    : _vm._e(),
                 ],
                 2
               ),
@@ -49209,7 +49154,7 @@ var render = function () {
                                 "btn btn-sm btn-secondary btn-fill float-right",
                               attrs: { to: { name: "create-user" } },
                             },
-                            [_vm._v("Novo")]
+                            [_vm._v("Criar")]
                           ),
                         ],
                         1
@@ -49217,36 +49162,55 @@ var render = function () {
                     ]),
                   ]),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "table-responsive" },
-                    [
-                      _c("l-table", {
-                        staticClass: "table-hover",
-                        attrs: {
-                          columns: _vm.table.columns,
-                          data: _vm.table.data,
-                          actions: _vm.table.actions,
-                        },
-                        on: {
-                          "delete-item-id": _vm.setCurrentItemForConfirmation,
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c(
+                  _vm.table.data.length
+                    ? _c(
                         "div",
-                        { staticClass: "text-right" },
+                        { staticClass: "table-responsive" },
                         [
-                          _c("pagination", {
-                            attrs: { pagination: _vm.table.pagination },
-                            on: { paginate: _vm.getTableData },
+                          _c("l-table", {
+                            staticClass: "table-hover",
+                            attrs: {
+                              columns: _vm.table.columns,
+                              data: _vm.table.data,
+                              actions: _vm.table.actions,
+                            },
+                            on: {
+                              "delete-item-id":
+                                _vm.setCurrentItemForConfirmation,
+                            },
                           }),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "text-right" },
+                            [
+                              _c("pagination", {
+                                attrs: { pagination: _vm.table.pagination },
+                                on: { paginate: _vm.getTableData },
+                              }),
+                            ],
+                            1
+                          ),
                         ],
                         1
-                      ),
-                    ],
-                    1
-                  ),
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  !_vm.table.data.length
+                    ? _c("div", [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "alert alert-primary text-center",
+                            attrs: { role: "alert" },
+                          },
+                          [
+                            _c("i", { staticClass: "bi bi-info-circle" }),
+                            _vm._v(" Nenhum usuário cadastrado\n            "),
+                          ]
+                        ),
+                      ])
+                    : _vm._e(),
                 ],
                 2
               ),
