@@ -7,8 +7,8 @@ export default {
       email: this.$route.params.email,
       token: this.$route.params.token,
       inputDisabled: false,
-      password: '123123aa',
-      password_confirmation: '123123aa'
+      password: '',
+      password_confirmation: ''
     };
   },
 
@@ -38,7 +38,6 @@ export default {
         .catch((err) => {
           this.$notifications.notify({
             message: `${err.response.data.message}`,
-            // icon: 'nc-icon nc-app',
             horizontalAlign: 'left',
             verticalAlign: 'top',
             type: 'danger'

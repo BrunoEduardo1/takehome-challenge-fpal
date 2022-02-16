@@ -6,8 +6,8 @@ export default {
 
   data() {
     return {
-      email: 'zfahey@example.org',
-      password: 'password'
+      email: '',
+      password: ''
     };
   },
 

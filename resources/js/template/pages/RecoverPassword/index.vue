@@ -4,7 +4,7 @@ export default {
 
   data() {
     return {
-      email: 'bruno_test@test.com',
+      email: '',
       inputDisabled: false
     };
   },
@@ -26,12 +26,10 @@ export default {
             verticalAlign: 'top',
             type: response.data.success ? 'success' : 'danger'
           });
-
         })
         .catch((err) => {
           this.$notifications.notify({
             message: `${err.response.data.error}`,
-            // icon: 'nc-icon nc-app',
             horizontalAlign: 'left',
             verticalAlign: 'top',
             type: 'danger'

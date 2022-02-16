@@ -6,9 +6,9 @@ export default {
 
   data() {
     return {
-      name: 'Bruno',
-      email: 'zfahey@example.org',
-      password: 'password'
+      name: '',
+      email: '',
+      password: ''
     };
   },
 
@@ -23,7 +23,6 @@ export default {
       axios
         .post(`/api/register`, formData)
         .then((response) => {
-
           this.$router.push({ name: 'Login' });
 
           this.$notifications.notify({
@@ -36,7 +35,6 @@ export default {
         .catch((err) => {
           this.$notifications.notify({
             message: `${err.response.data.message}`,
-            // icon: 'nc-icon nc-app',
             horizontalAlign: 'left',
             verticalAlign: 'top',
             type: 'danger'
@@ -93,9 +91,7 @@ export default {
           <small><router-link :to="'/'">Possui usuário?</router-link></small>
         </div>
 
-        <button class="w-100 btn btn-lg btn-success" type="submit">
-          Finalizar
-        </button>
+        <button class="w-100 btn btn-lg btn-success" type="submit">Finalizar</button>
       </form>
     </main>
   </div>
