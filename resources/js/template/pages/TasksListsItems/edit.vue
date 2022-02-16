@@ -101,10 +101,10 @@ export default {
         <div class="col-md-12">
           <card>
             <h4 slot="header" class="card-title">Editar item da lista</h4>
-            <form>
+            <form @submit.stop.prevent="handleSubmit">
               <div class="row">
                 <div class="col-md-12">
-                  <base-input type="text" label="Título" placeholder="Título" v-model="taskItem.title"> </base-input>
+                  <base-input type="text" label="Título" placeholder="Título" required="true" v-model="taskItem.title"> </base-input>
                 </div>
               </div>
 
@@ -117,7 +117,6 @@ export default {
                 <button
                   type="submit"
                   class="btn btn-primary btn-fill float-right"
-                  @click.prevent="handleSubmit"
                   :disabled="inputDisabled"
                 >
                   Atualizar

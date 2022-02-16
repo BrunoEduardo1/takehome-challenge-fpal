@@ -101,13 +101,13 @@ export default {
         <div class="col-md-12">
           <card>
             <h4 slot="header" class="card-title">Editar usuário</h4>
-            <form>
+            <form @submit.stop.prevent="handleSubmit">
               <div class="row">
                 <div class="col-md-6">
-                  <base-input type="text" label="Nome" placeholder="Nome" v-model="user.name"> </base-input>
+                  <base-input type="text" label="Nome" placeholder="Nome" required="true" v-model="user.name"> </base-input>
                 </div>
                 <div class="col-md-6">
-                  <base-input type="email" label="Email" placeholder="Email" v-model="user.email"> </base-input>
+                  <base-input type="email" label="Email" placeholder="Email" required="true" v-model="user.email"> </base-input>
                 </div>
               </div>
 
@@ -122,7 +122,6 @@ export default {
                 <button
                   type="submit"
                   class="btn btn-primary btn-fill float-right"
-                  @click.prevent="handleSubmit"
                   :disabled="inputDisabled"
                 >
                   Atualizar
