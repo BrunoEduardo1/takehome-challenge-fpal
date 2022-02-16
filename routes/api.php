@@ -24,6 +24,10 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
 
+    Route::group(['prefix' => 'dashboard', 'middleware' => 'auth:api'], function ($router) { 
+        Route::get('getData', 'DashboardController@getData');
+    });
+
     Route::group(['prefix' => 'users', 'middleware' => 'auth:api'], function ($router) {
         Route::get('', 'UsersController@all');
         Route::get('/{id}', 'UsersController@getById');

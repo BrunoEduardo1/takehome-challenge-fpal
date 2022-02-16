@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar" :style="sidebarStyle" :data-color="backgroundColor" :data-image="backgroundImage">
+  <div class="sidebar" :style="sidebarStyle" :data-color="backgroundColor">
     <div class="sidebar-wrapper">
       <div class="logo">
         <a href="#" class="simple-text logo__container nav-link">
@@ -56,7 +56,7 @@ export default {
     },
     backgroundImage: {
       type: String,
-      default: 'img/sidebar-5.jpg'
+      default: ''
     },
     activeColor: {
       type: String,

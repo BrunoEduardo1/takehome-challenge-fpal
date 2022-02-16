@@ -10,7 +10,11 @@ export default {
     tableData: Object,
     title: String,
     description: String,
-    footerData: String
+    footerData: String,
+    hideDeleButton: {
+      type: Boolean,
+      default: false
+    }
   },
   emits: ['set-task-as-done', 'set-task-as-undone', 'delete-item-id'],
   methods: {
@@ -64,6 +68,7 @@ export default {
                 <i class="bi bi-pencil-square" aria-label="Editar"></i
               ></router-link>
               <router-link
+                v-if="!hideDeleButton"
                 class="btn btn-danger btn-sm mr-2"
                 data-toggle="modal"
                 data-target="#confirm-delete-modal"
