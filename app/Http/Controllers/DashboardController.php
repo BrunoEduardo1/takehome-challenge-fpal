@@ -16,7 +16,7 @@ class DashboardController extends Controller
             'users_count' => User::count(),
             'tasks_lists_count' => TaskList::count(),
             'pending_tasks_count' => TaskListItem::where('done', 'F')->count(),
-            'finished_tasks_count' => TaskListItem::where('done', 'F')->count(),
+            'finished_tasks_count' => TaskListItem::where('done', 'T')->count(),
             'tasks_lists' => [],
         ];
 

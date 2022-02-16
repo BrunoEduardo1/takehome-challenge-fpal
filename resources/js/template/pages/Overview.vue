@@ -66,9 +66,11 @@ export default {
     },
     setTaskItemAsDone(hash) {
       changeItemStatus(hash, 'T');
+      this.getData();
     },
     setTaskItemAsUndone(hash) {
       changeItemStatus(hash, 'F');
+      this.getData();
     }
   }
 };
