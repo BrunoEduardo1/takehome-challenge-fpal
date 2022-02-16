@@ -4,7 +4,7 @@
       <slot name="columns">
         <tr>
           <th v-for="column in columns" :key="column.key">{{ column.header }}</th>
-          <th v-if="actions">Ações</th>
+          <th v-if="actions.length">Ações</th>
         </tr>
       </slot>
     </thead>
@@ -14,20 +14,23 @@
           <td v-for="column in columns" :key="column.key" v-if="hasValue(item, column.key)">
             {{ itemValue(item, column.key) }}
           </td>
-          <td v-if="actions">
-            <router-link
-              v-for="action in actions"
-              :key="action.key"
-              class="btn btn-primary btn-sm mr-2"
-              :class="action.key == 'delete' ? 'btn-danger' : ''"
-              :data-toggle="action.key == 'delete' ? 'modal' : ''"
-              :data-target="action.key == 'delete' ? '#confirm-delete-modal' : ''"
-              :to="`${action.path}/${item.id}`"
-              event=""
-              @click.native="clickListener(action.key, `${action.path}/${item.id}`, item.id)"
-              >{{ action.name }}</router-link
-            >
-          </td>
+          <slot name="actions" :row="item">
+            <td v-if="actions.length">
+              <router-link
+                v-for="action in actions"
+                :key="action.key"
+                class="btn btn-primary btn-sm mr-2"
+                :class="action.key == 'delete' ? 'btn-danger' : ''"
+                :data-toggle="action.key == 'delete' ? 'modal' : ''"
+                :data-target="action.key == 'delete' ? '#confirm-delete-modal' : ''"
+                :to="`${action.path}/${item.id}`"
+                event=""
+                @click.native="clickListener(action.key, `${action.path}/${item.id}`, item.id)"
+              >
+                <i :class="actionIcons[action.key]" :aria-label="action.name" :title="action.name"></i>
+              </router-link>
+            </td>
+          </slot>
         </slot>
       </tr>
     </tbody>
@@ -56,6 +59,16 @@ export default {
       }
     }
   },
+  data() {
+    return {
+      actionIcons: {
+        view: 'bi bi-eye',
+        edit: 'bi bi-pencil-square',
+        delete: 'bi bi-trash'
+      }
+    };
+  },
+  emits: ['delete-item-id'],
   methods: {
     hasValue(item, column) {
       return item[column.toLowerCase()] !== 'undefined';

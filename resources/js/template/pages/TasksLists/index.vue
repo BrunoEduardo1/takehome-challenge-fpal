@@ -3,7 +3,7 @@ import Cookie from 'js-cookie';
 import LTable from '../../components/Table.vue';
 import Pagination from '../../components/Pagination.vue';
 import Card from '../../components/Cards/Card.vue';
-import DeleteModal from '../../components/Modals/Delete.vue';
+import DeleteModal from '../../components/Modals/MDelete.vue';
 const tableColumns = [
   { key: 'id', header: 'Id' },
   { key: 'title', header: 'Título' },
@@ -136,7 +136,7 @@ export default {
     </div>
     <delete-modal
       :item="confirmDeleteId"
-      title="Deletar usuário?"
+      title="Deletar lista de tarefas e seus itens?"
       @delete-confirmed="deleteConfirmedItem"
     ></delete-modal>
   </div>

@@ -21,6 +21,8 @@ import TasksEdit from '../pages/TasksLists/edit';
 import TasksCreate from '../pages/TasksLists/create';
 import TasksView from '../pages/TasksLists/view';
 
+import TasksListsItemsEdit from '../pages/TasksListsItems/edit';
+
 // user authentication pages
 import Login from '../pages/Login';
 import Register from '../pages/Register';
@@ -93,6 +95,11 @@ const routes = [
         path: 'tasks/view/:id',
         name: 'view-task',
         component: TasksView
+      },
+      {
+        path: 'tasks/items/edit/:id',
+        name: 'edit-task-item',
+        component: TasksListsItemsEdit
       },
       {
         path: 'users',
