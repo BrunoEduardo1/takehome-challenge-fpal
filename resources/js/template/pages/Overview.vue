@@ -1,7 +1,6 @@
 <script>
 import ItemsList from '../components/Tasks/ItemsList.vue';
 import StatsCard from '../components/Cards/StatsCard.vue';
-import LTable from '../components/Table.vue';
 import Cookie from 'js-cookie';
 
 const changeItemStatus = (hash, status) => {
@@ -21,7 +20,6 @@ const changeItemStatus = (hash, status) => {
 
 export default {
   components: {
-    LTable,
     StatsCard,
     ItemsList
   },
@@ -172,4 +170,3 @@ export default {
   </div>
 </template>
 <style></style>
-
