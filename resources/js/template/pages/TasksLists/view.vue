@@ -172,7 +172,7 @@ export default {
                 <i class="bi bi-info-circle"></i> Nenhuma tarefa adicionada a lista
               </div>
               <div class="mt-0">
-                <form>
+                <form @submit.stop.prevent="handleTaskItemSubmit">
                   <div class="row justify-content-sm-center">
                     <div class="col-sm-5">
                       <base-input
@@ -189,7 +189,6 @@ export default {
                       <button
                         type="submit"
                         class="btn btn-primary btn-fill"
-                        @click.prevent="handleTaskItemSubmit"
                         :disabled="inputTaskItemDisabled"
                       >
                         Adicionar

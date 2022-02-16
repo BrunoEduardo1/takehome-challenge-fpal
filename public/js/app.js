@@ -47857,66 +47857,72 @@ var render = function () {
                       : _vm._e(),
                     _vm._v(" "),
                     _c("div", { staticClass: "mt-0" }, [
-                      _c("form", [
-                        _c(
-                          "div",
-                          { staticClass: "row justify-content-sm-center" },
-                          [
-                            _c(
-                              "div",
-                              { staticClass: "col-sm-5" },
-                              [
-                                _c("base-input", {
-                                  attrs: {
-                                    type: "text",
-                                    label: "",
-                                    placeholder: "Nova tarefa",
-                                    disabled: _vm.inputTaskItemDisabled,
-                                    required: "true",
-                                  },
-                                  model: {
-                                    value: _vm.taskItem.title,
-                                    callback: function ($$v) {
-                                      _vm.$set(_vm.taskItem, "title", $$v)
-                                    },
-                                    expression: "taskItem.title",
-                                  },
-                                }),
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-sm-auto" }, [
+                      _c(
+                        "form",
+                        {
+                          on: {
+                            submit: function ($event) {
+                              $event.stopPropagation()
+                              $event.preventDefault()
+                              return _vm.handleTaskItemSubmit.apply(
+                                null,
+                                arguments
+                              )
+                            },
+                          },
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "row justify-content-sm-center" },
+                            [
                               _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-primary btn-fill",
-                                  attrs: {
-                                    type: "submit",
-                                    disabled: _vm.inputTaskItemDisabled,
-                                  },
-                                  on: {
-                                    click: function ($event) {
-                                      $event.preventDefault()
-                                      return _vm.handleTaskItemSubmit.apply(
-                                        null,
-                                        arguments
-                                      )
+                                "div",
+                                { staticClass: "col-sm-5" },
+                                [
+                                  _c("base-input", {
+                                    attrs: {
+                                      type: "text",
+                                      label: "",
+                                      placeholder: "Nova tarefa",
+                                      disabled: _vm.inputTaskItemDisabled,
+                                      required: "true",
+                                    },
+                                    model: {
+                                      value: _vm.taskItem.title,
+                                      callback: function ($$v) {
+                                        _vm.$set(_vm.taskItem, "title", $$v)
+                                      },
+                                      expression: "taskItem.title",
+                                    },
+                                  }),
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-sm-auto" }, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-primary btn-fill",
+                                    attrs: {
+                                      type: "submit",
+                                      disabled: _vm.inputTaskItemDisabled,
                                     },
                                   },
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                      Adicionar\n                    "
-                                  ),
-                                ]
-                              ),
-                            ]),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "clearfix" }),
-                      ]),
+                                  [
+                                    _vm._v(
+                                      "\n                      Adicionar\n                    "
+                                    ),
+                                  ]
+                                ),
+                              ]),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "clearfix" }),
+                        ]
+                      ),
                     ]),
                     _vm._v(" "),
                     _c(
