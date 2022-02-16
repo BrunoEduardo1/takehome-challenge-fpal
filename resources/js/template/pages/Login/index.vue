@@ -26,7 +26,7 @@ export default {
           this.$router.push({ name: 'Overview' });
 
           this.$notifications.notify({
-            message: `Welcome`,
+            message: `Bem vindo`,
             horizontalAlign: 'left',
             verticalAlign: 'top',
             type: 'success'

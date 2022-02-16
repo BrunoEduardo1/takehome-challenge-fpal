@@ -59,7 +59,6 @@ export default {
         .catch((err) => {
           this.$notifications.notify({
             message: `${err.response.data.message}`,
-            // icon: 'nc-icon nc-app',
             horizontalAlign: 'left',
             verticalAlign: 'top',
             type: 'danger'
@@ -112,12 +111,12 @@ export default {
                 </div>
                 <div class="col">
                   <router-link class="btn btn-sm btn-secondary btn-fill float-right" :to="{ name: 'create-task' }"
-                    >Novo</router-link
+                    >Criar</router-link
                   >
                 </div>
               </div>
             </template>
-            <div class="table-responsive">
+            <div v-if="table.data.length" class="table-responsive">
               <l-table
                 class="table-hover"
                 :columns="table.columns"
@@ -128,6 +127,11 @@ export default {
               </l-table>
               <div class="text-right">
                 <pagination :pagination="table.pagination" @paginate="getTableData"></pagination>
+              </div>
+            </div>
+            <div v-if="!table.data.length">
+              <div class="alert alert-primary text-center" role="alert">
+                <i class="bi bi-info-circle"></i> Nenhuma lista de tarefas cadastrada
               </div>
             </div>
           </card>
