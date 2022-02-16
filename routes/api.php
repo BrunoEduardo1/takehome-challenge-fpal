@@ -33,6 +33,13 @@ Route::group(['middleware' => 'api'], function ($router) {
     });
 
     Route::group(['prefix' => 'tasks', 'middleware' => 'auth:api'], function ($router) {
+        Route::get('items', 'TasksListsItemsController@all');
+        Route::get('items/{id}', 'TasksListsItemsController@getById');
+        Route::get('items/getByHash/{hash}', 'TasksListsItemsController@getByHash');
+        Route::post('items/create', 'TasksListsItemsController@create');
+        Route::put('items/update/{hash}', 'TasksListsItemsController@update');
+        Route::delete('items/delete/{hash}', 'TasksListsItemsController@delete');
+
         Route::get('', 'TasksListsController@all');
         Route::get('/{id}', 'TasksListsController@getById');
         Route::get('/getByHash/{hash}', 'TasksListsController@getByHash');
@@ -42,7 +49,3 @@ Route::group(['middleware' => 'api'], function ($router) {
     });
 
 });
-
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
