@@ -73,10 +73,12 @@ export default {
             <form @submit.stop.prevent="handleSubmit">
               <div class="row">
                 <div class="col-md-6">
-                  <base-input type="text" label="Nome" placeholder="Nome" required="true" v-model="user.name"> </base-input>
+                  <base-input type="text" label="Nome" placeholder="Nome" required="true" v-model="user.name">
+                  </base-input>
                 </div>
                 <div class="col-md-6">
-                  <base-input type="email" label="Email" placeholder="Email" required="true" v-model="user.email"> </base-input>
+                  <base-input type="email" label="Email" placeholder="Email" required="true" v-model="user.email">
+                  </base-input>
                 </div>
               </div>
 
@@ -88,11 +90,7 @@ export default {
 
               <div class="text-center">
                 <router-link class="btn btn-secondary btn-fill float-left" :to="{ name: 'users' }">Voltar</router-link>
-                <button
-                  type="submit"
-                  class="btn btn-primary btn-fill float-right"
-                  :disabled="inputDisabled"
-                >
+                <button type="submit" class="btn btn-primary btn-fill float-right" :disabled="inputDisabled">
                   Criar
                 </button>
               </div>

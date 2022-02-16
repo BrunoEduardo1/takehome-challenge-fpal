@@ -75,7 +75,6 @@ export default {
           this.inputDisabled = false;
 
           this.$router.push({ name: 'view-task', params: { id: this.taskItem.taskId } });
-
         })
         .catch((err) => {
           this.$notifications.notify({
@@ -104,7 +103,8 @@ export default {
             <form @submit.stop.prevent="handleSubmit">
               <div class="row">
                 <div class="col-md-12">
-                  <base-input type="text" label="Título" placeholder="Título" required="true" v-model="taskItem.title"> </base-input>
+                  <base-input type="text" label="Título" placeholder="Título" required="true" v-model="taskItem.title">
+                  </base-input>
                 </div>
               </div>
 
@@ -114,11 +114,7 @@ export default {
                   :to="{ name: 'view-task', params: { id: taskItem.taskId } }"
                   >Voltar</router-link
                 >
-                <button
-                  type="submit"
-                  class="btn btn-primary btn-fill float-right"
-                  :disabled="inputDisabled"
-                >
+                <button type="submit" class="btn btn-primary btn-fill float-right" :disabled="inputDisabled">
                   Atualizar
                 </button>
               </div>

@@ -102,12 +102,19 @@ export default {
             <form @submit.stop.prevent="handleSubmit">
               <div class="row">
                 <div class="col-md-12">
-                  <base-input type="text" label="Título" placeholder="Nome" required="true" v-model="task.title"> </base-input>
+                  <base-input type="text" label="Título" placeholder="Nome" required="true" v-model="task.title">
+                  </base-input>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <base-input type="text" label="Descrição" placeholder="Descrição" required="true" v-model="task.description">
+                  <base-input
+                    type="text"
+                    label="Descrição"
+                    placeholder="Descrição"
+                    required="true"
+                    v-model="task.description"
+                  >
                   </base-input>
                 </div>
               </div>
@@ -116,11 +123,7 @@ export default {
                 <router-link class="btn btn-secondary btn-fill float-left" :to="{ name: 'tasks-lists' }"
                   >Voltar</router-link
                 >
-                <button
-                  type="submit"
-                  class="btn btn-primary btn-fill float-right"
-                  :disabled="inputDisabled"
-                >
+                <button type="submit" class="btn btn-primary btn-fill float-right" :disabled="inputDisabled">
                   Atualizar
                 </button>
               </div>
