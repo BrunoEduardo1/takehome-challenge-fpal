@@ -25,7 +25,7 @@
                 :data-target="action.key == 'delete' ? '#confirm-delete-modal' : ''"
                 :to="`${action.path}/${item.id}`"
                 event=""
-                @click.native="clickListener(action.key, `${action.path}/${item.id}`, item.id)"
+                @click.native="clickListener(action.key, `${action.path}/${item.id}`, (item.hash ? item.hash : item.id))"
               >
                 <i :class="actionIcons[action.key]" :aria-label="action.name" :title="action.name"></i>
               </router-link>

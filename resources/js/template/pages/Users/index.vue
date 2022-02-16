@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     setCurrentItemForConfirmation(id) {
-      this.confirmDeleteId = id;
+      this.confirmDeleteId = `${id}`;
     },
     deleteConfirmedItem(id) {
       const token = Cookie.get('_task_token');
