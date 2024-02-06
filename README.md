@@ -7,9 +7,9 @@
 ## Instalação
 
 ```
-git clone git@github.com:BrunoEduardo1/laravel-vue-tasks.git
+git clone git@github.com:BrunoEduardo1/takehome-challenge-fpal.git
 
-cd laravel-vue-tasks
+cd takehome-challenge-fpal
 
 # após criar o banco definir credenciais no arquivo(necessário para artisan migrate) e credenciais de email
 cp .env.example .env
